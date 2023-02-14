@@ -1,5 +1,12 @@
 
 
+### [0.1.1](https://github.com/CyanSalt/parallelize-webpack-unplugin/compare/v0.1.0...v0.1.1) (2023-02-14)
+
+
+### Bug Fixes
+
+* ignore src files ([b6765b1](https://github.com/CyanSalt/parallelize-webpack-unplugin/commit/b6765b110173d0079f917e72c6fdd8b58e24bc9e))
+
 ## 0.1.0 (2023-02-14)
 
 

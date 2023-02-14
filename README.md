@@ -30,20 +30,21 @@ This module exports a `parallelize` method for converting unplugin-based plugins
 
 ```js
 const { parallelize } = require('parallelize-webpack-unplugin')
-const MyUnpluginPlugin = require('/path/to/my-unplugin-plugin')
 
 // To get a new unplugin plugin
-parallelize(MyUnpluginPlugin)
+parallelize('/path/to/my-unplugin-plugin')
 ```
 
 You can just
 
 ```diff
 // webpack.config.js
+- const { default: MyUnpluginPlugin } = require('/path/to/my-unplugin-plugin/webpack')
+
 module.exports = {
   plugins: [
--   MyUnpluginPlugin(options),
-+   parallelize(MyUnpluginPlugin)(options),
+-     MyUnpluginPlugin(options),
++     parallelize('/path/to/my-unplugin-plugin')(options),
   ],
 }
 ```

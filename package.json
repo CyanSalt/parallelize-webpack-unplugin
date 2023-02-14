@@ -1,0 +1,39 @@
+{
+  "name": "parallelize-webpack-unplugin",
+  "version": "0.1.0-0",
+  "description": "Use unplugin with thread-loader in webpack",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prepack": "rm -rf dist && tsc",
+    "lint": "eslint --ignore-path .gitignore --fix .",
+    "release": "release-it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CyanSalt/parallelize-webpack-unplugin.git"
+  },
+  "keywords": [
+    "thread-loader",
+    "unplugin",
+    "webpack"
+  ],
+  "author": "CyanSalt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CyanSalt/parallelize-webpack-unplugin/issues"
+  },
+  "homepage": "https://github.com/CyanSalt/parallelize-webpack-unplugin#readme",
+  "devDependencies": {
+    "@cyansalt/eslint-config-preset": "^1.12.1",
+    "@cyansalt/tsconfig": "^2.1.1",
+    "@release-it/conventional-changelog": "^5.1.1",
+    "@types/node": "^18.13.0",
+    "@types/webpack": "^5.28.0",
+    "release-it": "^15.6.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "unplugin": "^1.0.1"
+  }
+}

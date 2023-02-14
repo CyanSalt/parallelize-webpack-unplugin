@@ -1,6 +1,6 @@
 {
   "name": "parallelize-webpack-unplugin",
-  "version": "0.1.0-0",
+  "version": "0.1.0",
   "description": "Use unplugin with thread-loader in webpack",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",

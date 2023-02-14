@@ -4,6 +4,9 @@
   "description": "Use unplugin with thread-loader in webpack",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepack": "rm -rf dist && tsc",
     "lint": "eslint --ignore-path .gitignore --fix .",

@@ -6,25 +6,17 @@ import { createRawPlugins } from './utils'
 
 const UNPLUGIN_VIRTUAL_MODULE_PREFIX = path.resolve(process.cwd(), '_virtual_')
 
-function createPluginFactory<T>(plugin: string) {
-  let raw: UnpluginOptions[] = []
-  const { webpack: webpackPluginFactory } = createUnplugin<T>(options => {
-    raw = createRawPlugins(plugin, options)
-    return raw.map(({ load, transform, ...hooks }) => hooks)
-  })
-  return (options: T) => ({
-    instance: webpackPluginFactory(options),
-    rawGetter: () => raw,
-  })
-}
-
 export function parallelize<T>(plugin: string): UnpluginFactoryOutput<T, WebpackPluginInstance> {
-  const factory = createPluginFactory<T>(plugin)
   return (options: T) => ({
     apply(compiler: Compiler) {
-      const { instance, rawGetter } = factory(options)
+      let rawPlugins: UnpluginOptions[] = []
+      const { webpack: webpackPluginFactory } = createUnplugin<T>(opts => {
+        rawPlugins = createRawPlugins(plugin, opts, { webpack: { compiler } })
+        return rawPlugins.map(({ load, transform, ...hooks }) => hooks)
+      })
+      const instance = webpackPluginFactory(options)
       instance.apply(compiler)
-      for (const hooks of rawGetter()) {
+      for (const hooks of rawPlugins) {
         if (hooks.transform) {
           compiler.options.module.rules.push({
             include(id) {

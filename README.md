@@ -1,5 +1,7 @@
 # parallelize-webpack-unplugin
 
+[![npm](https://img.shields.io/npm/v/parallelize-webpack-unplugin.svg)](https://www.npmjs.com/package/parallelize-webpack-unplugin)
+
 Use [unplugin](https://github.com/unjs/unplugin/) with [thread-loader](https://github.com/webpack-contrib/thread-loader/) in [webpack](https://webpack.js.org/).
 
 ## Why You Need It

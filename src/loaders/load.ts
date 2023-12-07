@@ -38,8 +38,12 @@ module.exports = function loader(source, map, meta) {
   const { UNPLUGIN_VIRTUAL_MODULE_PREFIX, plugin, options } = this.query as LoadLoaderOptions
   const raw = createRawPlugins(plugin, options)
   const context: UnpluginContext = {
-    error: error => this.emitError(buildError(error)),
-    warn: error => this.emitWarning(buildError(error)),
+    error: error => {
+      this.emitError(buildError(error))
+    },
+    warn: error => {
+      this.emitWarning(buildError(error))
+    },
   }
   let id = this.resource
   if (id.startsWith(UNPLUGIN_VIRTUAL_MODULE_PREFIX)) {

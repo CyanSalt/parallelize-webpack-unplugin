@@ -37,8 +37,12 @@ module.exports = function loader(source, map, meta) {
   const { plugin, options } = this.query as TransformLoaderOptions
   const raw = createRawPlugins(plugin, options)
   const context: UnpluginContext = {
-    error: error => this.emitError(buildError(error)),
-    warn: error => this.emitWarning(buildError(error)),
+    error: error => {
+      this.emitError(buildError(error))
+    },
+    warn: error => {
+      this.emitWarning(buildError(error))
+    },
   }
   const id = this.resource
   transform(context, raw, source, map, id)

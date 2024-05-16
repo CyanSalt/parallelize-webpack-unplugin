@@ -2,7 +2,7 @@
   "extends": "./tsconfig",
   "include": [
     "**/*.js",
-    "**/*.ts",
-    ".eslintrc.js"
+    "**/*.mjs",
+    "**/*.ts"
   ]
 }

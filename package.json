@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "prepack": "rm -rf dist && tsc",
-    "lint": "eslint --ignore-path .gitignore --fix .",
+    "lint": "eslint --fix './**/*.{js,mjs,ts}'",
     "release": "release-it"
   },
   "repository": {
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/CyanSalt/parallelize-webpack-unplugin#readme",
   "devDependencies": {
-    "@cyansalt/eslint-config-preset": "^1.17.0",
+    "@cyansalt/eslint-config": "^4.0.0",
     "@cyansalt/tsconfig": "^2.2.1",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/node": "^20.10.4",

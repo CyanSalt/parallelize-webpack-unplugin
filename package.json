@@ -33,6 +33,7 @@
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/node": "^20.10.4",
     "@types/webpack": "^5.28.5",
+    "eslint": "^9.3.0",
     "release-it": "^17.0.0",
     "typescript": "^5.3.3"
   },

@@ -32,6 +32,7 @@ export function parallelize<T>(plugin: string): UnpluginFactoryOutput<T, Webpack
               if (hooks.transformInclude && !hooks.transformInclude(id)) return []
               return [{
                 loader: require.resolve('./loaders/transform.cjs'),
+                ident: hooks.name,
                 options: {
                   plugin,
                   options,

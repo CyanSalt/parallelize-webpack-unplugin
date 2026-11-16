@@ -25,6 +25,7 @@
   "scripts": {
     "prepack": "tsdown",
     "lint": "eslint --fix './**/*.{js,mjs,ts}'",
+    "lint:ci": "eslint --max-warnings 0 './**/*.{js,mjs,ts}'",
     "release": "release-it"
   },
   "repository": {

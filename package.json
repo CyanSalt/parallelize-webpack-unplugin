@@ -2,13 +2,28 @@
   "name": "parallelize-webpack-unplugin",
   "version": "0.1.2",
   "description": "Use unplugin with thread-loader in webpack",
-  "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "prepack": "rm -rf dist && tsc",
+    "prepack": "tsdown",
     "lint": "eslint --fix './**/*.{js,mjs,ts}'",
     "release": "release-it"
   },
@@ -29,13 +44,14 @@
   "homepage": "https://github.com/CyanSalt/parallelize-webpack-unplugin#readme",
   "devDependencies": {
     "@cyansalt/eslint-config": "^4.0.0",
-    "@cyansalt/tsconfig": "^2.2.1",
-    "@release-it/conventional-changelog": "^8.0.1",
-    "@types/node": "^20.10.4",
+    "@cyansalt/tsconfig": "^3.0.2",
+    "@release-it/conventional-changelog": "^12.0.2",
+    "@types/node": "^24.19.2",
     "@types/webpack": "^5.28.5",
-    "eslint": "^9.3.0",
-    "release-it": "^17.0.0",
-    "typescript": "^5.3.3"
+    "eslint": "^10.15.0",
+    "release-it": "^21.1.2",
+    "tsdown": "^0.23.7",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
     "unplugin": "^1.0.1"

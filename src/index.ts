@@ -1,3 +1,4 @@
+import { createRequire } from 'module'
 import * as path from 'path'
 import type { UnpluginFactoryOutput, UnpluginOptions } from 'unplugin'
 import { createUnplugin } from 'unplugin'
@@ -16,6 +17,7 @@ export function parallelize<T>(plugin: string): UnpluginFactoryOutput<T, Webpack
       })
       const instance = webpackPluginFactory(options)
       instance.apply(compiler)
+      const require = createRequire(import.meta.url)
       for (const hooks of rawPlugins) {
         if (hooks.transform) {
           compiler.options.module.rules.push({
@@ -27,7 +29,7 @@ export function parallelize<T>(plugin: string): UnpluginFactoryOutput<T, Webpack
             enforce: hooks.enforce,
             use: [
               {
-                loader: require.resolve('./loaders/transform'),
+                loader: require.resolve('./loaders/transform.cjs'),
                 options: {
                   plugin,
                   options,
@@ -50,7 +52,7 @@ export function parallelize<T>(plugin: string): UnpluginFactoryOutput<T, Webpack
             enforce: hooks.enforce,
             use: [
               {
-                loader: require.resolve('./loaders/load'),
+                loader: require.resolve('./loaders/load.cjs'),
                 options: {
                   UNPLUGIN_VIRTUAL_MODULE_PREFIX,
                   plugin,

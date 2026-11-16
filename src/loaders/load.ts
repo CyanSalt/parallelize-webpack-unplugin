@@ -1,4 +1,4 @@
-import type { UnpluginContext, UnpluginOptions } from 'unplugin'
+import type { UnpluginContext, UnpluginMessage, UnpluginOptions } from 'unplugin'
 import type { LoaderDefinition } from 'webpack'
 import { createRawPlugins } from '../utils'
 
@@ -8,8 +8,13 @@ interface LoadLoaderOptions {
   options: any,
 }
 
-function buildError(error: string | Error) {
-  return typeof error === 'string' ? new Error(error) : error
+function buildError(error: string | Error | UnpluginMessage) {
+  if (typeof error === 'string') {
+    return new Error(error)
+  }
+  return error instanceof Error
+    ? error
+    : new Error('message' in error ? error.message : String(error))
 }
 
 async function load(
@@ -23,9 +28,13 @@ async function load(
     if (hooks.load) {
       const result = await hooks.load.call(context, id)
       if (result) {
-        code = result.code
-        if (result.map) {
-          map = result.map
+        if (typeof result === 'string') {
+          code = result
+        } else {
+          code = result.code
+          if (result.map) {
+            map = result.map
+          }
         }
       }
     }
@@ -33,7 +42,7 @@ async function load(
   return { code, map }
 }
 
-module.exports = function loader(source, map, meta) {
+const loader: LoaderDefinition<LoadLoaderOptions> = function (source, map, meta) {
   const callback = this.async()
   const { UNPLUGIN_VIRTUAL_MODULE_PREFIX, plugin, options } = this.query as LoadLoaderOptions
   const raw = createRawPlugins(plugin, options)
@@ -55,4 +64,6 @@ module.exports = function loader(source, map, meta) {
     }, err => {
       callback(err)
     })
-} satisfies LoaderDefinition<LoadLoaderOptions>
+}
+
+export default loader

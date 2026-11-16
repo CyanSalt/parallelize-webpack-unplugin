@@ -58,7 +58,7 @@ const loader: LoaderDefinition<LoadLoaderOptions> = function (source, map, meta)
   if (id.startsWith(UNPLUGIN_VIRTUAL_MODULE_PREFIX)) {
     id = decodeURIComponent(id.slice(UNPLUGIN_VIRTUAL_MODULE_PREFIX.length))
   }
-  load(context, raw, source, map, this.resource)
+  load(context, raw, source, map, id)
     .then(result => {
       callback(null, result.code, result.map, meta)
     }, err => {

@@ -5,6 +5,7 @@
     "types": ["node"]
   },
   "include": [
+    "tests",
     "*.config.mjs",
     "*.config.ts"
   ]

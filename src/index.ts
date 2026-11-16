@@ -7,6 +7,10 @@ import { createRawPlugins } from './utils'
 
 const UNPLUGIN_VIRTUAL_MODULE_PREFIX = path.resolve(process.cwd(), '_virtual_')
 
+function normalizeAbsolutePath(file: string) {
+  return path.isAbsolute(file) ? path.normalize(file) : file
+}
+
 export function parallelize<T>(plugin: string): UnpluginFactoryOutput<T, WebpackPluginInstance> {
   return (options: T) => ({
     apply(compiler: Compiler) {
@@ -21,21 +25,19 @@ export function parallelize<T>(plugin: string): UnpluginFactoryOutput<T, Webpack
       for (const hooks of rawPlugins) {
         if (hooks.transform) {
           compiler.options.module.rules.push({
-            include(id) {
-              return !(
-                hooks.transformInclude && !hooks.transformInclude(id)
-              )
-            },
             enforce: hooks.enforce,
-            use: [
-              {
+            use(data) {
+              if (typeof data.resource !== 'string') return []
+              const id = normalizeAbsolutePath(data.resource + (data.resourceQuery || ''))
+              if (hooks.transformInclude && !hooks.transformInclude(id)) return []
+              return [{
                 loader: require.resolve('./loaders/transform.cjs'),
                 options: {
                   plugin,
                   options,
                 },
-              },
-            ],
+              }]
+            },
           })
         }
         if (hooks.load) {

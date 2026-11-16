@@ -1,3 +1,4 @@
+import { createRequire } from 'module'
 import type { UnpluginFactory } from 'unplugin'
 import type { Compiler } from 'webpack'
 
@@ -10,7 +11,10 @@ export interface WebpackContextMeta {
 
 function loadFactory<T>(mod: any): UnpluginFactory<T> {
   if (!mod) return mod
-  if (typeof mod === 'string') return loadFactory(require(mod))
+  if (typeof mod === 'string') {
+    const require = createRequire(import.meta.url)
+    return loadFactory(require(mod))
+  }
   if (mod.default) return loadFactory(mod.default as object)
   return mod.raw || mod
 }

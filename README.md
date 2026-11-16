@@ -17,7 +17,6 @@ This module supports the conversion of unplugin-based plugins that satisfy the c
 
 - The plugin is instantiated without side effects, i.e. the return value of the function passed to `createUnplugin` avoids the use of closure variables
 - The plugin does not rely on metadata in the context during instantiation, rather `meta.webpack.compiler`
-- `loadInclude` and `transformInclude` only determine the module `id`, ignoring `resourceQuery`
 - `loadInclude` and `transformInclude` cannot include external modules
 
 Most plugins satisfy the above conditions and can therefore be transformed.

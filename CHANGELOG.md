@@ -1,4 +1,15 @@
+# Changelog
 
+## [0.2.0](https://github.com/CyanSalt/parallelize-webpack-unplugin/compare/v0.1.2...v0.2.0) (2026-11-17)
+
+### Features
+
+* support transformInclude with queries ([9539d40](https://github.com/CyanSalt/parallelize-webpack-unplugin/commit/9539d4025f9d373bf79e0859a4140a904a35f446))
+
+### Bug Fixes
+
+* cjs bundle ([f70d854](https://github.com/CyanSalt/parallelize-webpack-unplugin/commit/f70d854dfba3405f77cc98f22cf34142b58333bd))
+* ident for transform rule ([6aa7a32](https://github.com/CyanSalt/parallelize-webpack-unplugin/commit/6aa7a324a080b5b0775e4afc3e6527a8c26b94d2))
 
 ### [0.1.2](https://github.com/CyanSalt/parallelize-webpack-unplugin/compare/v0.1.1...v0.1.2) (2023-02-21)
 
